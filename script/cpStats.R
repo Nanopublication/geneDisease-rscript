@@ -9,15 +9,23 @@
 " 
 library(lattice)
 # Read csv file
-mydf <- read.csv('/home/rajaram/eelke_pc/Meuk/cpgp/results/analysis2/geneConceptProfileStats', 
+mydf <- read.csv('/home/rajaram/eelke_pc/Meuk/cpgp/results/analysis2/diseasesConceptProfileStats', 
                  colClasses=c("integer", "integer", "integer", "integer", "integer" ), header= T, fileEncoding= "windows-1252")
+
+#overlapping stats file
+mydf <- read.csv('/home/rajaram/overlappingConcepts', 
+                 colClasses=c("integer"), header= T, fileEncoding= "windows-1252")
+
+
 #Plot parameters
 xLimit <- c(0, 10000)
 dataSize <- c(500)
 title <- c("diseasesConceptProfileStats")
+pointWidth <- c(0.1)
+markerStyle <- c("*")
 
 # Get data from 'conceptProfileLength' column
-conceptProfileLength <- mydf$conceptProfileLength
+conceptProfileLength <- mydf[,1] #mydf$conceptProfileLength 
 # Get data from 'noOfPMids' column
 noOfAbstracts <- mydf$noOfPMids
 # Find maximum profile length
@@ -29,10 +37,12 @@ hist(conceptProfileLength, prob=TRUE, xlim= xLimit,   col="black", breaks=dataSi
 
 plot(noOfAbstracts, conceptProfileLength, type="l", main="Fig 2c") 
 
-xyplot(conceptProfileLength ~ noOfAbstracts, grid = TRUE, type = c("p"))
+xyplot(conceptProfileLength ~ noOfAbstracts, grid = TRUE, 
+       type = c("p"), col="black", pch=markerStyle, lwd=pointWidth)
 
-#  xyplot(log10(conceptProfileLength) ~ log10(noOfAbstracts), grid = TRUE,  
-#         type = c("p", "smooth"), col.line = "darkorange", lwd = 3)
+xyplot(log10(conceptProfileLength) ~ log10(noOfAbstracts), grid = TRUE,  
+        type = c("p", "smooth"), col.line = "red", 
+       col="black", pch="*", lwd = 3, ylim = c(1,5), main="Fig.2c (disease)")
 
 # xyplot(conceptProfileLength ~ noOfAbstracts,
 #        grid = TRUE,
