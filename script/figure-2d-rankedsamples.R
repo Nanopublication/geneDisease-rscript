@@ -17,7 +17,7 @@ lowScore <- read.csv('/home/rajaram/mysql-data/random-samples-rank-based/matchsc
 
 
 highScoreGeneAbs <- (highScore[,4])
-highScoreDiseaseAbs <- (highScore[,5])
+highScoreDiseaseAbs <-(highScore[,5])
 
 maxLengthHighScoringGene <- max(highScoreGeneAbs)
 maxLengthHighScoringDisease <- max(highScoreDiseaseAbs)
@@ -31,7 +31,7 @@ maxLengthLowScoringDisease <- max(lowScoreDiseaseAbs)
 #yLimit <- c(0,0.4)
 
 plot(density(highScoreGeneAbs), lty="solid", col="blue", lwd=2, main="High scoring assocations",
-     xlab="Number of abstracts")
+     xlab="Number of abstracts")#, xlim=c(0,10000))
 lines(density(highScoreDiseaseAbs), lty="solid", col="red", lwd=2)
 legend('topright',  c("Gene","Disease"), lty=1, col=c('blue', 'red'), bty='n')
 

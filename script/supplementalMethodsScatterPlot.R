@@ -1,5 +1,7 @@
 library(ggplot2)
 library(reshape)
+library(lattice)
+library(latticeExtra)
 
 genedf <- read.csv('/home/rajaram/mysql-data/randomMatchscoreSamples_5000', 
                    colClasses=c("integer", "integer", "double", "integer", "integer"), header= T, fileEncoding= "windows-1252")
@@ -13,8 +15,8 @@ z <- log(genedf$score)
 #y <- (genedf$diseaseAbstract)
 #z <- (genedf$score)
 
-xLabel <- c("No. of abstracts for gene")
-yLabel <- c("No. of abstracts for disease")
+xLabel <- c("log(No. of abstracts for gene)")
+yLabel <- c("log(matchscore)")
 pointWidth <- c(0.1)
 markerStyle <- c(19)
 xLimit <- c(0, 20000)
@@ -28,5 +30,20 @@ d <- data.frame(x, y, z)
 dg<-qplot(x, y, colour = z, data = d, xlab = xLabel, ylab = yLabel)
 #dg<-qplot(x, y, colour = z, data = d, xlab = xLabel, ylab = yLabel, xlim = xLimit, ylim = yLimit)
 dg + scale_colour_gradient(low="green", high="red",  name="Match score\n(As numeric)")
+
+
+xyGene <- xyplot(z ~ x, grid = TRUE,  
+       type = c("p", "smooth"), col.line = "violet", xlab = c("log(No. of abstracts)"), ylab = yLabel,
+       col="blue", pch="*", lwd = 3, main="Fig.2d")
+
+xyDisease <- xyplot(z ~ y, grid = TRUE, xlab = c("log(No. of abstracts)"), ylab = yLabel, 
+           type = c("p", "smooth"), col.line = "brown",
+           col="red", pch="*", lwd = 3, main="Fig.2d")
+
+leg <- legend('bottomright',  c("High scoring gene","Low scoring gene"), lty=1, col=c('blue', 'red'), bty='n')
+
+
+xyGene+xyDisease
+
 
 #dev.off() #only 129kb in size
