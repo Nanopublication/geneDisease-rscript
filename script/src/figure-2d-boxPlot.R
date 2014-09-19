@@ -12,8 +12,11 @@ mydf <- read.csv('/home/rajaram/mysql-data/python-data/test-matchscores-cpLength
                  colClasses=c("double", "double", "double", "double", "double","double", "double", "double", "double", "double"), header= T, fileEncoding= "windows-1252")
 data <- log(mydf)
 
-#png("/tmp/myplot.png", width=10, height=8, units="in", res=300)
+# plot parameters
+yLabel <- c("log(matchscore)")
+title <- c ("Sorted by gene CP length")
 
+#png("/tmp/myplot.png", width=10, height=8, units="in", res=300)
 boxplot(data)
-title('Sorted by gene CP length',ylab='log(matchscore)')
+title(title, ylab=yLabel)
 #dev.off() #only 129kb in size
