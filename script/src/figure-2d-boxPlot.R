@@ -12,7 +12,7 @@ mydf <- read.csv('/home/rajaram/mysql-data/python-data/test-matchscores-cpLength
                  colClasses=c("double", "double", "double", "double", "double","double", "double", "double", "double", "double"), header= T, fileEncoding= "windows-1252")
 data <- log(mydf)
 
-# plot parameters
+# Plot parameters
 yLabel <- c("log(matchscore)")
 title <- c ("Sorted by gene CP length")
 

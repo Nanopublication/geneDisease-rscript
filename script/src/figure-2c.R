@@ -14,10 +14,12 @@ library(latticeExtra)
 mydf <- read.csv('/home/rajaram/eelke_pc/Meuk/cpgp/results/analysis2/diseasesConceptProfileStats', 
                  colClasses=c("integer", "integer", "integer"), header= T, fileEncoding= "windows-1252")
 
+# Get data from 'noOfPMids' column
 abstracts <- log(mydf$noOfPMids)
+# Get data from 'conceptProfileLength' column
 cpLength <- log(mydf$conceptProfileLength)
 
-# plot parameters
+# Plot parameters
 xLabel <- c("log(no.of abstracts)")
 yLabel <- c("log(concept profile length)")
 title <- c ("Fig 2c (disease)")
